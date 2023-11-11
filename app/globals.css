@@ -7,3 +7,12 @@ body,
 :root {
   height: 100%;
 }
+
+.form {
+  animation: 2s show ease;
+}
+
+@keyframes show {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

@@ -2,7 +2,7 @@
 import Link from "next/link"
 
 
-export default function BegButton(){
+export default function StartButton(){
     return(
         <>
             <Link href = '/menu'>
