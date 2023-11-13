@@ -9,6 +9,20 @@ import {FlightFormProps} from "@/app/menu/page";
 import {FiLoader} from "react-icons/fi";
 import {AiOutlineArrowRight} from "react-icons/ai";
 
+interface ClassOfServiceData {
+  type: string;
+  amount: number;
+}
+
+interface FormattedData {
+  airline_name: string;
+  flight_duration: number;
+  takeoff_time: number;
+  landing_time: number;
+  class_of_service_data: ClassOfServiceData[];
+  special_menu_codes: any[];
+}
+
 const schema = yup
   .object({
     airlineName: yup
@@ -41,14 +55,14 @@ const schema = yup
   })
   .required()
 
-function convertTimeToFloat(timeString) {
+function convertTimeToFloat(timeString: string) {
   const [hours, minutes] = timeString.split(":").map(Number);
   return hours + minutes / 60;
 }
 
-const getMenu = async (body) => {
+const getMenu = async (body: FormattedData) => {
   try {
-    return await axios.post('http://127.0.0.1:8000/menu', {
+    return await axios.post('https://air-food.onrender.com/menu', {
       ...body
     });
   } catch (error) {
@@ -64,7 +78,7 @@ export default function FlightForm({setIsSubmitted, setMenuData, setIsLoading, i
     handleSubmit,
   } = useForm({resolver: yupResolver(schema)})
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: any) => {
     const formattedData = {
       airline_name: data.airlineName,
       flight_duration: data.flightDuration,
