@@ -1,5 +1,4 @@
 import StartButton from "@/components/StartButton";
-import Block from "@/components/Block";
 
 export default function Page(){
   return(
