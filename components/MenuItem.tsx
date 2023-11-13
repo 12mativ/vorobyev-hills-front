@@ -5,7 +5,7 @@ export default function MenuItem({menuItem}: MenuItemProps) {
   return (
     <div className='flex md:flex-row md:gap-x-3 gap-y-4 flex-col justify-between bg-sky-600 p-3 rounded-lg'>
 
-      <div className='flex flex-col w-[70%]'>
+      <div className='flex flex-col w-full md:w-[70%]'>
         <p className='text-xl text-slate-300'>Блюда</p>
         {menuItem.dishes.map((dishItem, index) => {
           return <li key={index}>{dishItem}</li>
