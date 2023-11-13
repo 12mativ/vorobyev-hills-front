@@ -94,7 +94,7 @@ export default function FlightForm({setIsSubmitted, setMenuData, setIsLoading, i
     setIsLoading(true)
     getMenu(formattedData).then(res => {
       setIsSubmitted(true)
-      setMenuData(res.data)
+      setMenuData(res?.data)
     }).finally(() => setIsLoading(false));
   }
 
