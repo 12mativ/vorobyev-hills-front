@@ -3,7 +3,7 @@ import {Menu} from "@/app/menu/page";
 
 export default function MenuItem({menuItem}: MenuItemProps) {
   return (
-    <div className='flex flex-row justify-between bg-sky-600 p-3 rounded-lg'>
+    <div className='flex md:flex-row md:gap-x-3 gap-y-4 flex-col justify-between bg-sky-600 p-3 rounded-lg'>
 
       <div className='flex flex-col w-[70%]'>
         <p className='text-xl text-slate-300'>Блюда</p>
@@ -16,20 +16,24 @@ export default function MenuItem({menuItem}: MenuItemProps) {
         <p className='text-slate-300'>
           Тип меню:
         </p>
-        <p>
+        <p className='pl-2'>
           {menuItem.quality_type}
         </p>
-        <p>
+        <p className='pl-2'>
           {menuItem.temperature_type}
         </p>
         <p className='text-slate-300'>
           Выдавать на:
         </p>
-        <p>{menuItem.time_type}</p>
+        <p className='pl-2'>
+          {menuItem.time_type}
+        </p>
         <p className='text-slate-300'>
           Количество порций:
         </p>
-        <p>{menuItem.amount}</p>
+        <p className='pl-2'>
+          {menuItem.amount}
+        </p>
       </div>
     </div>
   )
