@@ -17,15 +17,14 @@ export default function Menu() {
         justify-center
         items-center
         p-3
-        h-auto
-        md:h-full
-        bg-[url('/img/1.jpg')]
-        bg-cover
-        bg-center
+        m-0
+        mt-auto
+        overflow-y-auto
+        bg-repeat
       "
     >
       {isSubmitted && menuData && !isLoading
-        ? <MenuDescription menuData={menuData} />
+        ? <MenuDescription menuData={menuData} isLoading={isLoading} setIsSubmitted={setIsSubmitted}/>
         : <FlightForm
             setIsSubmitted={setIsSubmitted}
             setMenuData={setMenuData}
@@ -46,7 +45,7 @@ export interface FlightFormProps {
 
 export interface MenuData {
   menu: Menu[]
-  specialMenu: []
+  special_menu: SpecialMenu[]
 }
 
 export interface Menu {
@@ -54,5 +53,11 @@ export interface Menu {
   amount: number
   time_type: string
   temperature_type: string
+  dishes: string[]
+}
+
+export interface SpecialMenu {
+  code: string
+  amount: number
   dishes: string[]
 }

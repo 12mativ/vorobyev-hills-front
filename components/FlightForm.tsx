@@ -4,10 +4,11 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import axios from "axios";
-import React from "react";
+import React, {useState} from "react";
 import {FlightFormProps} from "@/app/menu/page";
-import {FiLoader} from "react-icons/fi";
-import {AiOutlineArrowRight} from "react-icons/ai";
+import SpecialMenu from "@/components/SpecialMenu";
+import MainForm from "@/components/MainForm";
+import {v4 as uuidv4} from 'uuid';
 
 interface ClassOfServiceData {
   type: string;
@@ -70,15 +71,60 @@ const getMenu = async (body: FormattedData) => {
   }
 }
 
+const menus = [
+  {name: 'Выберите тип меню', value: ""},
+  {name: 'Диабетическое', value: "DBML"},
+  {name: 'Питание с низким содержанием молочного белка', value: "NLML"},
+  {name: 'Низкокалорийное питание', value: "LCML"},
+  {name: 'Питание без добавленной соли', value: "LSML"},
+  {name: 'Постное', value: "VJML"},
+  {name: 'Мусульманское', value: "MOML"},
+  {name: 'Халяльное', value: "HOML"},
+  {name: 'Кошерное', value: "KSML"},
+  {name: 'Вегетарианское', value: "VLML"},
+  {name: 'Детский набор', value: "CHML"},
+  {name: 'Детское питание для грудных младенцев', value: "BBML"},
+]
+
 export default function FlightForm({setIsSubmitted, setMenuData, setIsLoading, isLoading}: FlightFormProps) {
+
+  const [selectedMenus, setSelectedMenus] = useState([])
+  const [availableMenus, setAvailableMenus] = useState(menus)
+  const [isFormPageChanged, setIsFormPageChanged] = useState(false)
+
+  const handleAddSelectedMenus = (id: string = uuidv4(), value: string = '', amount: number = 0) => {
+    const isObject = selectedMenus.some(obj => obj.id === id)
+    if (!isObject) {
+      setSelectedMenus((prevState) => {
+        return [...prevState, {id: id, value: '', amount: 0}]
+      })
+      return null
+    }
+
+    const newData = {value: value, amount: amount}
+    const updatedArray = selectedMenus.map(obj => (obj.id === id ? { ...obj, ...newData } : obj));
+
+    setSelectedMenus(updatedArray);
+  }
+
+  // const handleFilterAvailableMenus = (value?: string) => {
+  //   if (value) {
+  //     setAvailableMenus(prevState => {
+  //       return prevState.filter(obj => obj.value !== value)
+  //     })
+  //   }
+  // }
 
   const {
     register,
-    formState: {errors},
+    formState: {errors, isValid = false },
     handleSubmit,
-  } = useForm({resolver: yupResolver(schema)})
+  } = useForm({mode: "onChange", resolver: yupResolver(schema)})
 
   const onSubmit = (data: any) => {
+    const specialMenus = selectedMenus.map(item => {
+      return {'code': item.value, 'amount': item.amount}
+    })
     const formattedData = {
       airline_name: data.airlineName,
       flight_duration: data.flightDuration,
@@ -88,7 +134,7 @@ export default function FlightForm({setIsSubmitted, setMenuData, setIsLoading, i
         { type: "economy", amount: data.economyAmount },
         { type: "business", amount: data.businessAmount }
       ],
-      special_menu_codes: []
+      special_menu_codes: specialMenus
     }
 
     setIsLoading(true)
@@ -103,140 +149,29 @@ export default function FlightForm({setIsSubmitted, setMenuData, setIsLoading, i
       onSubmit={handleSubmit(onSubmit)}
       className="form bg-sky-600 rounded-lg p-3 md:p-6 gap-y-6 flex flex-col w-[90%] md:w-[80%] lg:w-[55%] items-center"
     >
-      <h3
-        className="text-2xl font-bold text-white text-center"
-      >
-        ВВЕДИТЕ ДЕТАЛИ РЕЙСА
-      </h3>
-      <div className="flex w-full flex-col gap-y-2 font-medium text-white">
-        <label htmlFor='airlineName'>Авиакомпания</label>
-        <select
-          {...register("airlineName")}
-          id="airlineName"
-          className="w-full p-2 mb-3 bg-sky-200 text-sky-600 rounded-lg text-lg font-semibold"
-        >
-          <option value="Аэрофлот">Аэрофлот</option>
-        </select>
-        <p className='text-red-500'>{errors.airlineName?.message}</p>
-      </div>
-      <div className="font-medium text-white flex flex-col md:w-[80%] md:w-full md:flex-row justify-between">
-        <div className="flex flex-col gap-y-4">
-
-          <div className='flex flex-col gap-y-2'>
-            <label htmlFor='businessAmount'>
-              Количество пассажиров в бизнес-классе:
-            </label>
-            <input
-              id='businessAmount'
-              type='number'
-              placeholder='Количество пассажиров в бизнес-классе'
-              {...register("businessAmount")}
-              className="bg-sky-200 rounded-lg text-sky-600 p-1"/>
-            <p className='text-red-400'>{errors.businessAmount?.message}</p>
-          </div>
-
-          <div className='flex flex-col gap-y-2'>
-            <label htmlFor='economyAmount'>
-              Количество пассажиров в эконом-классе:
-            </label>
-            <input
-              id='economyAmount'
-              type='number'
-              {...register("economyAmount")}
-              className=" bg-sky-200 rounded-lg  text-sky-600 p-1"
-            />
-            <p className='text-red-400'>{errors.economyAmount?.message}</p>
-          </div>
-
-          <div className='flex flex-col gap-y-2'>
-            <label htmlFor='flightDuration'>
-              Время полета:
-            </label>
-            <label htmlFor="flightDuration" className='text-sm text-slate-300'>
-              * В часах
-            </label>
-            <input
-              id='flightDuration'
-              type='number'
-              {...register("flightDuration")}
-              className="bg-sky-200 rounded-lg  text-sky-600 p-1"
-            />
-            <p className='text-red-400'>{errors.flightDuration?.message}</p>
-          </div>
-
-        </div>
-        <div className="flex flex-col gap-y-4">
-
-          <div className='flex flex-col gap-y-2'>
-            <label htmlFor='takeoffTime'>
-              Время взлета:
-            </label>
-            <input
-              type="time"
-              id='takeoffTime'
-              {...register("takeoffTime")}
-              className="bg-sky-200 rounded-lg text-sky-600 p-1"
-            />
-            <p className='text-red-400'>{errors.takeoffTime?.message}</p>
-          </div>
-
-          <div className='flex flex-col gap-y-2'>
-            <label htmlFor='landingTime'>
-              Время посадки:
-            </label>
-            <input
-              type="time"
-              id='landingTime'
-              {...register("landingTime")}
-              className="bg-sky-200 rounded-lg text-sky-600 p-1"
-            />
-            <p className='text-red-400'>{errors.landingTime?.message}</p>
-          </div>
-
-          <div className='flex flex-col gap-y-2'>
-            <p>
-              Специальное меню:
-            </p>
-            <select name="spmenu" className="p-1 bg-sky-200 text-sky-600 rounded-lg font-semibold ">
-              <option value="value1" disabled selected>Выберите меню</option>
-              <option value="value2">Кашерное</option>
-              <option value="value2">Халяль</option>
-            </select>
-          </div>
-
-          <div className='flex flex-col gap-y-2'>
-            <p className="">
-              Количество:
-            </p>
-            <input type="number" name="countmenu" min={0} max={350}
-                   className=" bg-sky-200 rounded-lg  text-sky-600 p-1"/>
-          </div>
-
-        </div>
-      </div>
-      <div className="flex justify-center items-center">
-        <button
-          className="group p-3 bg-sky-200 text-lg text-sky-600 rounded-lg font-semibold"
-          type='submit'
-          disabled={isLoading}
-        >
-          {isLoading
-            ? (
-              <div className='flex gap-x-2 items-center'>
-                <FiLoader size={24} className='animate-spin'/>
-                <p>Загрузка...</p>
-              </div>
-            )
-            : (
-              <div className='flex gap-x-1 items-center'>
-                <p>Отправить</p>
-                <AiOutlineArrowRight size={24} className='group-hover:translate-x-2 transition'/>
-              </div>
-            )
-          }
-        </button>
-      </div>
+      {isFormPageChanged
+        ? (
+          <SpecialMenu
+            isLoading={isLoading}
+            setIsFormPageChanged={setIsFormPageChanged}
+            selectedMenus={selectedMenus}
+            availableMenus={availableMenus}
+            handleAddSelectedMenus={handleAddSelectedMenus}
+          />
+        )
+        : (
+          <MainForm
+            isLoading={isLoading}
+            register={register}
+            errors={errors}
+            setIsFormPageChanged={setIsFormPageChanged}
+            isValid={isValid}
+          />
+        )
+      }
     </form>
   )
 }
+
+
 

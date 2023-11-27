@@ -6,6 +6,7 @@ html,
 body,
 :root {
   height: 100%;
+  background-color: #5BB9A5;
 }
 
 .form {
