@@ -4,7 +4,7 @@ import {useRouter} from "next/navigation";
 
 interface MainFormProps {
   isLoading: boolean
-  register: (state: string) => any
+  register: any
   errors: any
   setIsFormPageChanged: (state: boolean) => void
   isValid: boolean
