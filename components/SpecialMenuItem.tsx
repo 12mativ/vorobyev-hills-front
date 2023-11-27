@@ -2,10 +2,15 @@
 
 import React, {useEffect, useState} from "react";
 
-const SpecialMenuItem = ({id, availableMenus, handleAddSelectedMenus}) => {
+interface SpecialMenuItemProps {
+  id: string
+  availableMenus: {name: string, value: string}[]
+  handleAddSelectedMenus: (id?: string, value?: string, amount?: number) => any
+}
+
+const SpecialMenuItem = ({id, availableMenus, handleAddSelectedMenus}: SpecialMenuItemProps) => {
   const [menuCode, setMenuCode] = useState('')
   const [amount, setAmount] = useState(0)
-  console.log('menus', availableMenus)
 
   useEffect(() => {
     handleAddSelectedMenus(id, menuCode, amount)

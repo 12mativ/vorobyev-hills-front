@@ -4,6 +4,12 @@ import {MenuData} from "@/app/menu/page";
 import {IoIosArrowBack} from "react-icons/io";
 import SpecialMenuItemDescription from "@/components/SpecialMenuItemDescription";
 
+interface MenuDescriptionProps {
+  menuData: MenuData
+  isLoading: boolean
+  setIsSubmitted: (state: boolean) => void
+}
+
 export default function MenuDescription({menuData, isLoading, setIsSubmitted}: MenuDescriptionProps) {
   return (
     <div>
@@ -27,10 +33,4 @@ export default function MenuDescription({menuData, isLoading, setIsSubmitted}: M
     </div>
 
   )
-}
-
-interface MenuDescriptionProps {
-  menuData: MenuData
-  isLoading: boolean
-  setIsSubmitted: (state: boolean) => void
 }

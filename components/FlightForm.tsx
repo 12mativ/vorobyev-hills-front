@@ -24,6 +24,12 @@ interface FormattedData {
   special_menu_codes: any[];
 }
 
+export interface SelectedMenu {
+  id: string
+  value: string
+  amount: number
+}
+
 const schema = yup
   .object({
     airlineName: yup
@@ -88,8 +94,8 @@ const menus = [
 
 export default function FlightForm({setIsSubmitted, setMenuData, setIsLoading, isLoading}: FlightFormProps) {
 
-  const [selectedMenus, setSelectedMenus] = useState([])
-  const [availableMenus, setAvailableMenus] = useState(menus)
+  const [selectedMenus, setSelectedMenus] = useState<SelectedMenu[]>([])
+  const [availableMenus, setAvailableMenus] = useState<typeof menus>(menus)
   const [isFormPageChanged, setIsFormPageChanged] = useState(false)
 
   const handleAddSelectedMenus = (id: string = uuidv4(), value: string = '', amount: number = 0) => {

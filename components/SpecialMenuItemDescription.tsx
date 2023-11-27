@@ -1,6 +1,5 @@
 import React from "react";
-import {Menu, SpecialMenu} from "@/app/menu/page";
-import SpecialMenuItem from "@/components/SpecialMenuItem";
+import {SpecialMenu} from "@/app/menu/page";
 
 export default function SpecialMenuItemDescription({menuItem}: MenuItemProps) {
   return (

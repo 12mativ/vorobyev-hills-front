@@ -1,6 +1,10 @@
 import React from "react";
 import {Menu} from "@/app/menu/page";
 
+interface MenuItemProps {
+  menuItem: Menu
+}
+
 export default function MenuItemDescription({menuItem}: MenuItemProps) {
   return (
     <div className='flex md:flex-row md:gap-x-3 gap-y-4 flex-col justify-between bg-sky-600 p-3 rounded-lg'>
@@ -37,8 +41,4 @@ export default function MenuItemDescription({menuItem}: MenuItemProps) {
       </div>
     </div>
   )
-}
-
-interface MenuItemProps {
-  menuItem: Menu
 }

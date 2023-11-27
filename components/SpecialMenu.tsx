@@ -5,6 +5,16 @@ import {IoIosArrowBack} from "react-icons/io";
 import {AiOutlineArrowRight} from "react-icons/ai";
 import {FiLoader} from "react-icons/fi";
 import SpecialMenuItem from "@/components/SpecialMenuItem";
+import {SelectedMenu} from "@/components/FlightForm";
+import {v4 as uuidv4} from "uuid";
+
+interface SpecialMenuProps {
+  selectedMenus: SelectedMenu[]
+  availableMenus: {name: string, value: string}[]
+  handleAddSelectedMenus: (id?: string, value?: string, amount?: number) => any
+  isLoading: boolean
+  setIsFormPageChanged: (state: boolean) => void
+}
 
 const SpecialMenu = (
   {
@@ -13,7 +23,7 @@ const SpecialMenu = (
     handleAddSelectedMenus,
     isLoading,
     setIsFormPageChanged
-  }) => {
+  }: SpecialMenuProps) => {
 
   return (
     <div className='w-[90%] flex flex-col gap-y-3 items-center'>

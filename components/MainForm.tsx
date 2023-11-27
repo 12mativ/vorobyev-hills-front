@@ -2,7 +2,15 @@ import React from "react";
 import {IoIosArrowBack} from "react-icons/io";
 import {useRouter} from "next/navigation";
 
-const MainForm = ({isLoading, register, errors, setIsFormPageChanged, isValid}) => {
+interface MainFormProps {
+  isLoading: boolean
+  register: (state: string) => any
+  errors: any
+  setIsFormPageChanged: (state: boolean) => void
+  isValid: boolean
+}
+
+const MainForm = ({isLoading, register, errors, setIsFormPageChanged, isValid}: MainFormProps) => {
   const router = useRouter()
 
   return (
