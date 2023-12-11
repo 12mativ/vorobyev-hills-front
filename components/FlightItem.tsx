@@ -3,7 +3,7 @@ import {Flight} from "@/app/flights-menu/page";
 import {IoAirplane} from "react-icons/io5";
 import {floatToTime} from "@/utils/time-translations";
 
-const FlightItem: React.FC<Flight> = ({
+const FlightItem: React.FC<Flight & {setChosenFlight: (state: Flight | undefined) => void}> = ({
                                         airline_name,
                                         takeoff_date,
                                         takeoff_time,
