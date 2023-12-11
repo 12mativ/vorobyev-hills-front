@@ -1,4 +1,4 @@
-import StartButton from "@/components/StartButton";
+import Link from "next/link";
 
 export default function Page(){
   return(
@@ -9,12 +9,25 @@ export default function Page(){
           <p className="text-5xl font-semibold pb-6 text-center">
             AirFood
           </p>
-          <p className="text-center pb-14 font-medium w-full">
-            Lorem ipsum dolor sit amet consectetur. Tristique urna feugiat risus quisque nec sed quam porttitor. Id mauris sit pharetra ullamcorper diam. Sit turpis convallis commodo risus. Et parturient quisque sed euismod sit convallis.
+          <p className="text-center text-lg w-full">
+            Сервис генерации меню для авиакомпаний.
+          </p>
+          <p className="text-center pb-14 text-lg w-full">
+            Удобно. Быстро. В одном месте.
           </p>
         </div>
 
-        <StartButton/>
+        <Link href ={'/menu'} className='mb-3'>
+          <button className="p-3 bg-sky-200 transition rounded-3xl hover:bg-sky-300 text-sky-600 font font-medium">
+            Начать с ручным вводом
+          </button>
+        </Link>
+        <Link href ={'/flights-menu'}>
+          <button className="p-3 bg-sky-200 transition rounded-3xl hover:bg-sky-300
+          text-sky-600 font font-medium">
+            Начать с использованием Aviationstack
+          </button>
+        </Link>
       </div>
   )
 } 

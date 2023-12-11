@@ -9,20 +9,8 @@ import {FlightFormProps} from "@/app/menu/page";
 import SpecialMenu from "@/components/SpecialMenu";
 import MainForm from "@/components/MainForm";
 import {v4 as uuidv4} from 'uuid';
-
-interface ClassOfServiceData {
-  type: string;
-  amount: number;
-}
-
-interface FormattedData {
-  airline_name: string;
-  flight_duration: number;
-  takeoff_time: number;
-  landing_time: number;
-  class_of_service_data: ClassOfServiceData[];
-  special_menu_codes: any[];
-}
+import {convertTimeToFloat} from "@/utils/time-translations";
+import {getMenu} from "@/utils/api";
 
 export interface SelectedMenu {
   id: string
@@ -62,20 +50,7 @@ const schema = yup
   })
   .required()
 
-function convertTimeToFloat(timeString: string) {
-  const [hours, minutes] = timeString.split(":").map(Number);
-  return hours + minutes / 60;
-}
 
-const getMenu = async (body: FormattedData) => {
-  try {
-    return await axios.post('https://air-food.onrender.com/menu', {
-      ...body
-    });
-  } catch (error) {
-    console.error(error);
-  }
-}
 
 const menus = [
   {name: 'Выберите тип меню', value: ""},
@@ -113,14 +88,6 @@ export default function FlightForm({setIsSubmitted, setMenuData, setIsLoading, i
     setSelectedMenus(updatedArray);
   }
 
-  // const handleFilterAvailableMenus = (value?: string) => {
-  //   if (value) {
-  //     setAvailableMenus(prevState => {
-  //       return prevState.filter(obj => obj.value !== value)
-  //     })
-  //   }
-  // }
-
   const {
     register,
     formState: {errors, isValid = false },
@@ -135,7 +102,6 @@ export default function FlightForm({setIsSubmitted, setMenuData, setIsLoading, i
       airline_name: data.airlineName,
       flight_duration: data.flightDuration,
       takeoff_time: convertTimeToFloat(data.takeoffTime),
-      landing_time: convertTimeToFloat(data.landingTime),
       class_of_service_data: [
         { type: "economy", amount: data.economyAmount },
         { type: "business", amount: data.businessAmount }

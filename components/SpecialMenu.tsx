@@ -54,6 +54,7 @@ const SpecialMenu = (
         onClick={() => handleAddSelectedMenus()}
         className="group p-3 w-auto text-sm bg-sky-200 text-lg text-sky-600 rounded-lg font-semibold"
         type='button'
+        disabled={isLoading}
       >
         Добавить новое специальное меню
       </button>
