@@ -27,7 +27,7 @@ export default function FlightMenu() {
         ])
         setIsLoading(false)
       } else {
-        setFlights(res.data.flights)
+        setFlights(res?.data.flights)
       }
     }).finally(() => setIsLoading(false))
 
