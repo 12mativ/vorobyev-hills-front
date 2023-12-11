@@ -29,7 +29,7 @@ const schema = yup
   })
   .required()
 
-const ChosenFlight: React.FC<Flight> = ({
+const ChosenFlight: React.FC<Flight & {setChosenFlight: (state: Flight | undefined) => void}> = ({
                                           flight_duration,
                                           takeoff_date,
                                           takeoff_time,
