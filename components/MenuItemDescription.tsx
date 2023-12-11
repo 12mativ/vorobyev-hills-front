@@ -5,6 +5,25 @@ interface MenuItemProps {
   menuItem: Menu
 }
 
+function covertDescriptionField(field: string) {
+  switch (field) {
+    case 'economy':
+      return 'Эконом'
+    case 'business':
+      return 'Бизнес'
+    case 'hot':
+      return 'Горячее'
+    case 'cold':
+      return 'Холодное'
+    case 'breakfast':
+      return 'Завтрак'
+    case 'lunch':
+      return 'Обед'
+    case 'dinner':
+      return 'Ужин'
+  }
+}
+
 export default function MenuItemDescription({menuItem}: MenuItemProps) {
   return (
     <div className='flex md:flex-row md:gap-x-3 gap-y-4 flex-col justify-between bg-sky-600 p-3 rounded-lg'>
@@ -21,16 +40,16 @@ export default function MenuItemDescription({menuItem}: MenuItemProps) {
           Тип меню:
         </p>
         <p className='pl-2'>
-          {menuItem.quality_type}
+          {covertDescriptionField(menuItem.quality_type)}
         </p>
         <p className='pl-2'>
-          {menuItem.temperature_type}
+          {covertDescriptionField(menuItem.temperature_type)}
         </p>
         <p className='text-slate-300'>
           Выдавать на:
         </p>
         <p className='pl-2'>
-          {menuItem.time_type}
+          {covertDescriptionField(menuItem.time_type)}
         </p>
         <p className='text-slate-300'>
           Количество порций:

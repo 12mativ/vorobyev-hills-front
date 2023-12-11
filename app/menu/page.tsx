@@ -24,7 +24,7 @@ export default function Menu() {
       "
     >
       {isSubmitted && menuData && !isLoading
-        ? <MenuDescription menuData={menuData} isLoading={isLoading} setIsSubmitted={setIsSubmitted}/>
+        ? <MenuDescription menuData={menuData} isLoading={isLoading} setIsSubmitted={setIsSubmitted} isMenuDesc/>
         : <FlightForm
             setIsSubmitted={setIsSubmitted}
             setMenuData={setMenuData}

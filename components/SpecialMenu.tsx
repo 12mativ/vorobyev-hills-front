@@ -68,8 +68,8 @@ const SpecialMenu = (
           {isLoading
             ? (
               <div className='flex gap-x-2 items-center'>
-                <FiLoader size={24} className='animate-spin'/>
                 <p>Загрузка...</p>
+                <FiLoader size={24} className='animate-spin'/>
               </div>
             )
             : (

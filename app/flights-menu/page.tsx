@@ -19,8 +19,18 @@ export default function FlightMenu() {
 
   useEffect(() => {
     getFlights().then(res => {
-      setFlights(res.data.flights)
+      if (res?.data.flights.length === 0) {
+        setFlights([
+          {airline_name: 'Аэрофлот', takeoff_date: '2023-12-12', takeoff_time: 0.5, flight_duration: 3.5},
+          {airline_name: 'Аэрофлот', takeoff_date: '2023-12-12', takeoff_time: 1.5, flight_duration: 6.35},
+          {airline_name: 'Аэрофлот', takeoff_date: '2023-12-12', takeoff_time: 3.25, flight_duration: 1.75}
+        ])
+        setIsLoading(false)
+      } else {
+        setFlights(res.data.flights)
+      }
     }).finally(() => setIsLoading(false))
+
   }, [])
 
   return (

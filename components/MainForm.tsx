@@ -50,7 +50,6 @@ const MainForm = ({isLoading, register, errors, setIsFormPageChanged, isValid}: 
             <input
               id='businessAmount'
               type='number'
-              placeholder='Количество пассажиров в бизнес-классе'
               {...register("businessAmount")}
               className="bg-sky-200 rounded-lg text-sky-600 p-1"/>
             <p className='text-red-400'>{errors.businessAmount?.message}</p>
