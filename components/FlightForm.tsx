@@ -106,9 +106,9 @@ export default function FlightForm({setIsSubmitted, setMenuData, setIsLoading, i
         { type: "economy", amount: data.economyAmount },
         { type: "business", amount: data.businessAmount }
       ],
-      special_menu_codes: specialMenus
-    }
-
+      special_menu_codes: specialMenus.length !== 0 ? specialMenus : []
+     }
+    console.log(formattedData)
     setIsLoading(true)
     getMenu(formattedData).then(res => {
       setIsSubmitted(true)
