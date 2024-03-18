@@ -68,7 +68,7 @@ const Page = () => {
           <Link
             href="#"
             key={flight.id}
-            className="bg-sky-600 rounded-lg p-3 md:p-6 gap-y-6 flex flex-col w-[90%] md:w-[49%] lg:w-[32%] items-center m-2 h-60 transition hover:bg-sky-300"
+            className="bg-sky-600 rounded-lg p-6 gap-y-6 flex flex-col w-full sm:w-[46.1%] md:w-[46.7%] lg:w-[30.9%] xl:w-[31.4%] 2xl:w-[23.4%] items-center m-3 h-60 transition hover:bg-sky-300"
           >
             <p className="text-2xl font-bold text-white text-center">{flight.airplaneName}</p>
             <p className="text-xl font-semibold text-white text-center mt-auto">{flight.startDate} - {flight.endDate}</p>
