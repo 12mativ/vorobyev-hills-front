@@ -72,7 +72,7 @@ const ChosenFlight: React.FC<Flight & {setChosenFlight: (state: Flight | undefin
       <button
         onClick={() => setChosenFlight(undefined)}
         className="text-white p-3 mb-2 self-start
-        text-sky-600 rounded-lg font-semibold"
+        rounded-lg font-semibold"
         type='button'
       >
         <IoIosArrowBack size={40}/>

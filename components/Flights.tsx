@@ -19,7 +19,7 @@ const Flights: React.FC<FlightsProps> = ({isLoading, flights, setChosenFlight}) 
      <button
        onClick={() => router.push('/')}
        className="text-white p-3 mb-2 self-start
-        text-sky-600 rounded-lg font-semibold"
+       rounded-lg font-semibold"
        type='button'
      >
        <IoIosArrowBack size={40} />

@@ -21,6 +21,7 @@ export default function Menu() {
         mt-auto
         overflow-y-auto
         bg-repeat
+        h-screen
       "
     >
       {isSubmitted && menuData && !isLoading

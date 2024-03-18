@@ -17,7 +17,7 @@ const MainForm = ({isLoading, register, errors, setIsFormPageChanged, isValid}: 
     <div className='w-full flex flex-col justify-center md:justify-between gap-y-3  '>
       <button
         onClick={() => router.push('/')}
-        className="flex text-white items-center gap-x-2 group mb-3 self-start text-lg text-sky-600 rounded-lg font-semibold"
+        className="flex text-white items-center gap-x-2 group mb-3 self-start text-lg rounded-lg font-semibold"
         type='button'
         disabled={isLoading}
       >
@@ -40,7 +40,7 @@ const MainForm = ({isLoading, register, errors, setIsFormPageChanged, isValid}: 
         </select>
         <p className='text-red-500'>{errors.airlineName?.message}</p>
       </div>
-      <div className="font-medium text-white flex flex-col md:w-[80%] md:w-full md:flex-row justify-between">
+      <div className="font-medium text-white flex flex-col md:w-[80%] md:flex-row justify-between">
         <div className="flex flex-col gap-y-4">
 
           <div className='flex flex-col gap-y-2'>
