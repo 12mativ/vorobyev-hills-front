@@ -5,7 +5,6 @@ import { addFlights } from "@/lib/features/flights/flightsSlice";
 import { useEffect } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 
 const Page = () => {
@@ -65,16 +64,18 @@ const Page = () => {
 
       <div className="flex flex-row flex-wrap justify-start items-start overflow-y-auto h-full w-full">
         {flights.map((flight) => (
-          <Link
-            href="#"
+          <div
             key={flight.id}
             className="bg-sky-600 rounded-lg p-6 gap-y-6 flex flex-col w-full sm:w-[46.1%] md:w-[46.7%] lg:w-[30.9%] xl:w-[31.4%] 2xl:w-[23.4%] items-center m-3 h-60 transition hover:bg-sky-300"
+            onClick={() => router.push(`/flights/${flight.id}`)}
+            role="button"
           >
             <p className="text-2xl font-bold text-white text-center">{flight.airplaneName}</p>
             <p className="text-xl font-semibold text-white text-center mt-auto">{flight.startDate} - {flight.endDate}</p>
-          </Link>
+          </div>
         ))}
       </div>
+
     </div>
   );
 };
