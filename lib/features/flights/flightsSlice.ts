@@ -1,12 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface IFlight {
-  id: number;
+interface Airplane {
+  id: string;
   airplaneName: string;
+  capacity: number;
+}
+
+interface IFlight {
+  id: string;
   startDate: string;
   endDate: string;
   startCity: string;
   endCity: string;
+  airplaneId: string;
+  airplane: Airplane;
 }
 
 interface IFlightsState {
@@ -14,7 +21,7 @@ interface IFlightsState {
 }
 
 const initialState: IFlightsState = {
-  flights: []
+  flights: [],
 };
 
 export const flightsSlice = createSlice({
