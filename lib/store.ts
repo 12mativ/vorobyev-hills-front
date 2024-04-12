@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import flightsReducer from "./features/flights/flightsSlice";
+import documentsReducer from "./features/documents/documentsSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      flightsReducer
+      documentsReducer
     },
   });
 };

@@ -6,8 +6,8 @@ import { Open_Sans } from 'next/font/google'
 const font = Open_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'AirFood',
-  description: 'Try our application for airlines food menu generation',
+  title: 'Vorobyev hills',
+  description: 'Try our application for documents classification',
 }
 
 export default function RootLayout({
