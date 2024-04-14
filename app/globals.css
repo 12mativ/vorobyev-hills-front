@@ -79,9 +79,9 @@ html,
 body,
 :root {
   height: 100%;
-  background: linear-gradient(-45deg, #0076a1, #3e9bbc, #8abccf, #3e9bbc);
+  background: linear-gradient(-45deg, #a10096, #3e9bbc, #65a5be, #2c61d3);
 	background-size: 400% 400%;
-	animation: gradient 15s ease infinite;
+	animation: gradient 10s ease infinite;
 }
 
 @keyframes gradient {

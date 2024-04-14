@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import documentsReducer from "./features/documents/documentsSlice";
+import filesReducer from "./features/files/filesSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      documentsReducer
+      filesReducer,
     },
   });
 };
