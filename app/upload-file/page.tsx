@@ -11,6 +11,7 @@ export default function Page() {
   const [classifiedFiles, setClassifiedFiles] = useState<{
     [key: string]: string;
   }>({});
+  const [isFilesClassifying, setIsFilesClassifying] = useState(false);
 
   return (
     <div className="flex justify-center items-center overflow-y-auto h-full p-2">
@@ -37,10 +38,11 @@ export default function Page() {
             <FileUpload
               setIsChoosingFiles={setIsChoosingFiles}
               setClassifiedFiles={setClassifiedFiles}
+              setIsFilesClassifying={setIsFilesClassifying}
             />
           </>
         ) : (
-          <ClassifiedFiles classifiedFiles={classifiedFiles} />
+          <ClassifiedFiles classifiedFiles={classifiedFiles} isFilesClassifying={isFilesClassifying} />
         )}
       </div>
     </div>

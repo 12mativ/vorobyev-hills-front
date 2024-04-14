@@ -18,7 +18,7 @@ import { getFiles } from "@/http/files/filesAPI";
 import { addDocuments, IFile } from "@/lib/features/files/filesSlice";
 import { convertEnglishToRussian } from "@/utils/formateFileType";
 import { createSelector } from "@reduxjs/toolkit";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -26,6 +26,7 @@ import { useEffect, useState } from "react";
 const Page = () => {
   const [searchFileName, setSearchFileName] = useState("");
   const [searchFileType, setSearchFileType] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [key, setKey] = useState(+new Date());
   const [value, setValue] = useState<string | undefined>(undefined);
   const dispatch = useAppDispatch();
@@ -47,9 +48,10 @@ const Page = () => {
   let files = useAppSelector(selectFilteredFiles);
 
   useEffect(() => {
+    setIsLoading(true)
     getFiles().then((res) => {
       dispatch(addDocuments(res.data.files));
-    });
+    }).finally(() => setIsLoading(false));
   }, []);
 
   return (
@@ -114,6 +116,7 @@ const Page = () => {
         </div>
 
         <ScrollArea className="whitespace-nowrap w-full h-72 pr-2 px-3">
+          {isLoading && <div className="flex items-center justify-center w-full"><Loader className="animate-spin" size={25} /></div>}
           {files?.map((file) => (
             <div
               key={file.timestamp}

@@ -11,9 +11,11 @@ import { cn } from "@/lib/utils";
 const FileUpload = ({
   setIsChoosingFiles,
   setClassifiedFiles,
+  setIsFilesClassifying
 }: {
   setIsChoosingFiles: Dispatch<SetStateAction<boolean>>;
   setClassifiedFiles: Dispatch<SetStateAction<{ [key: string]: string }>>;
+  setIsFilesClassifying: Dispatch<SetStateAction<boolean>>;
 }) => {
   const [files, setFiles] = useState<{ id: string; file: File }[]>([]);
 
@@ -30,13 +32,14 @@ const FileUpload = ({
   };
 
   const handleSubmit = () => {
+    setIsFilesClassifying(true);
     const formData = new FormData();
     files.forEach((file) => {
       formData.append("files", file.file);
     });
     classifyFiles(formData).then((res) => {
       setClassifiedFiles(res.data.message);
-    });
+    }).finally(() => setIsFilesClassifying(false));
     setIsChoosingFiles((prevState) => !prevState);
   };
 

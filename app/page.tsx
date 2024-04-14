@@ -23,6 +23,7 @@ export default function Page() {
           <Image src="/1.png" width={100} height={35} alt="Россия - страна возможностей" />
           <Image src="/1.svg" width={100} height={35} alt="Цифровой прорыв" />
           <Image src="/2.svg" width={100} height={35} alt="Министерство экономического развития РФ" />
+          <Image src="/2.jpeg" width={100} height={35} alt="АКСЕЛЕРАТОР ВОЗМОЖНОСТЕЙ" />
         </div>
     </div>
   );
